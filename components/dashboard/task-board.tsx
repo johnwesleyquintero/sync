@@ -123,29 +123,29 @@ export function TaskBoard() {
   }
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle>Task Board</CardTitle>
-            <CardDescription>Manage and track your tasks</CardDescription>
+    <Card className="bg-white shadow-none border-0">
+      <CardHeader className="pb-4 px-6 pt-6">
+        <div className="flex items-center justify-between space-x-4">
+          <div className="space-y-1">
+            <CardTitle className="text-lg font-semibold text-gray-900">Task Board</CardTitle>
+            <CardDescription className="text-sm text-gray-500">Manage and track your tasks</CardDescription>
           </div>
-          <Button size="sm">
+          <Button size="sm" variant="outline" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50">
             <PlusCircle className="mr-2 h-4 w-4" />
             Add Task
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-6 pb-6">
         <Tabs defaultValue="board" className="w-full">
-          <TabsList className="mb-4">
-            <TabsTrigger value="board">Board</TabsTrigger>
-            <TabsTrigger value="list">List</TabsTrigger>
-            <TabsTrigger value="timeline">Timeline</TabsTrigger>
+          <TabsList className="mb-6 bg-gray-50 p-1 rounded-lg">
+            <TabsTrigger value="board" className="px-4 py-1.5 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm">Board</TabsTrigger>
+            <TabsTrigger value="list" className="px-4 py-1.5 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm">List</TabsTrigger>
+            <TabsTrigger value="timeline" className="px-4 py-1.5 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm">Timeline</TabsTrigger>
           </TabsList>
 
           <TabsContent value="board" className="mt-0">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
               {/* To Do Column */}
               <div className="space-y-4">
                 <div className="font-medium text-sm flex items-center">
@@ -154,8 +154,8 @@ export function TaskBoard() {
                 </div>
 
                 {getStatusTasks("todo").map((task) => (
-                  <Card key={task.id} className="shadow-sm">
-                    <CardContent className="p-3">
+                  <Card key={task.id} className="shadow-sm border border-gray-200">
+                    <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <Badge className={getPriorityColor(task.priority)} variant="secondary">
@@ -199,8 +199,8 @@ export function TaskBoard() {
                 </div>
 
                 {getStatusTasks("in-progress").map((task) => (
-                  <Card key={task.id} className="shadow-sm">
-                    <CardContent className="p-3">
+                  <Card key={task.id} className="shadow-sm border border-gray-200">
+                    <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <Badge className={getPriorityColor(task.priority)} variant="secondary">
@@ -244,8 +244,8 @@ export function TaskBoard() {
                 </div>
 
                 {getStatusTasks("review").map((task) => (
-                  <Card key={task.id} className="shadow-sm">
-                    <CardContent className="p-3">
+                  <Card key={task.id} className="shadow-sm border border-gray-200">
+                    <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <Badge className={getPriorityColor(task.priority)} variant="secondary">
@@ -289,8 +289,8 @@ export function TaskBoard() {
                 </div>
 
                 {getStatusTasks("done").map((task) => (
-                  <Card key={task.id} className="shadow-sm">
-                    <CardContent className="p-3">
+                  <Card key={task.id} className="shadow-sm border border-gray-200">
+                    <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <Badge className={getPriorityColor(task.priority)} variant="secondary">
