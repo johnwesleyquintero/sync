@@ -11,6 +11,9 @@ const config = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      sans: ['var(--font-sans)', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -19,6 +22,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -60,6 +66,10 @@ const config = {
           accent: "hsl(var(--sidebar-accent))",
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        vibrant: {
+          DEFAULT: "hsl(262 83% 58%)",
+          foreground: "hsl(210 40% 98%)",
         },
       },
       borderRadius: {

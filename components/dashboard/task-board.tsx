@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { PlusCircle, MoreHorizontal } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
+import TimelineView from './timeline-view';
 interface Task {
   id: string
   title: string
@@ -24,6 +24,10 @@ interface Task {
 }
 
 export function TaskBoard() {
+  const [selectedTheme, setSelectedTheme] = useState('default'); // 'default', 'theme1', 'theme2', etc.
+  const handleThemeChange = (theme: string) => {
+    setSelectedTheme(theme);
+  };
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: "task-1",
@@ -105,16 +109,22 @@ export function TaskBoard() {
     },
   ])
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: string, theme: string) => {
+    let baseColor = 'vibrant';
+    if (theme === 'theme1') {
+      baseColor = 'red';
+    } else if (theme === 'theme2') {
+      baseColor = 'blue';
+    }
     switch (priority) {
       case "high":
-        return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+        return `bg-${baseColor}-100 text-${baseColor}-800 dark:bg-${baseColor}-900/30 dark:text-${baseColor}-400`
       case "medium":
-        return "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
+        return `bg-${baseColor}-100 text-${baseColor}-800 dark:bg-${baseColor}-900/30 dark:text-${baseColor}-400`
       case "low":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+        return `bg-${baseColor}-100 text-${baseColor}-800 dark:bg-${baseColor}-900/30 dark:text-${baseColor}-400`
       default:
-        return "bg-slate-100 text-slate-800 dark:bg-slate-900/30 dark:text-slate-400"
+        return `bg-${baseColor}-100 text-${baseColor}-800 dark:bg-${baseColor}-900/30 dark:text-${baseColor}-400`
     }
   }
 
@@ -130,6 +140,18 @@ export function TaskBoard() {
             <CardTitle className="text-lg font-semibold text-gray-900">Task Board</CardTitle>
             <CardDescription className="text-sm text-gray-500">Manage and track your tasks</CardDescription>
           </div>
+          <DropdownMenu>
+             <DropdownMenuTrigger asChild>
+               <Button size="sm" variant="outline" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50">
+                 Theme
+               </Button>
+             </DropdownMenuTrigger>
+             <DropdownMenuContent align="end">
+               <DropdownMenuItem onClick={() => handleThemeChange('default')}>Default</DropdownMenuItem>
+               <DropdownMenuItem onClick={() => handleThemeChange('theme1')}>Theme 1</DropdownMenuItem>
+               <DropdownMenuItem onClick={() => handleThemeChange('theme2')}>Theme 2</DropdownMenuItem>
+             </DropdownMenuContent>
+           </DropdownMenu>
           <Button size="sm" variant="outline" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50">
             <PlusCircle className="mr-2 h-4 w-4" />
             Add Task
@@ -154,11 +176,11 @@ export function TaskBoard() {
                 </div>
 
                 {getStatusTasks("todo").map((task) => (
-                  <Card key={task.id} className="shadow-sm border border-gray-200">
+                  <Card key={task.id} className="shadow-sm border border-gray-200 hover:shadow-md hover:scale-105 transition-transform duration-150">
                     <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <Badge className={getPriorityColor(task.priority)} variant="secondary">
+                          <Badge className={getPriorityColor(task.priority, selectedTheme)} variant="secondary">
                             {task.priority}
                           </Badge>
                           <DropdownMenu>
@@ -203,7 +225,7 @@ export function TaskBoard() {
                     <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <Badge className={getPriorityColor(task.priority)} variant="secondary">
+                          <Badge className={getPriorityColor(task.priority, selectedTheme)} variant="secondary">
                             {task.priority}
                           </Badge>
                           <DropdownMenu>
@@ -248,7 +270,7 @@ export function TaskBoard() {
                     <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <Badge className={getPriorityColor(task.priority)} variant="secondary">
+                          <Badge className={getPriorityColor(task.priority, selectedTheme)} variant="secondary">
                             {task.priority}
                           </Badge>
                           <DropdownMenu>
@@ -293,7 +315,7 @@ export function TaskBoard() {
                     <CardContent className="p-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <Badge className={getPriorityColor(task.priority)} variant="secondary">
+                          <Badge className={getPriorityColor(task.priority, selectedTheme)} variant="secondary">
                             {task.priority}
                           </Badge>
                           <DropdownMenu>
@@ -352,7 +374,7 @@ export function TaskBoard() {
                     </div>
                   </div>
                   <div className="col-span-2">
-                    <Badge className={getPriorityColor(task.priority)} variant="secondary">
+                    <Badge className={getPriorityColor(task.priority, selectedTheme)} variant="secondary">
                       {task.priority}
                     </Badge>
                   </div>
@@ -363,14 +385,7 @@ export function TaskBoard() {
           </TabsContent>
 
           <TabsContent value="timeline" className="mt-0">
-            <div className="flex justify-center items-center p-8 text-center">
-              <div className="max-w-md">
-                <h3 className="text-lg font-medium">Timeline View Coming Soon</h3>
-                <p className="text-sm text-muted-foreground mt-2">
-                  We're working on a Gantt chart timeline view for better project visualization. Stay tuned!
-                </p>
-              </div>
-            </div>
+            <TimelineView />
           </TabsContent>
         </Tabs>
       </CardContent>
