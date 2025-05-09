@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, LayoutDashboard, Calendar, ListTodo, Users, BarChart, Settings, PlusCircle, Inbox } from "lucide-react"
 import {
@@ -12,12 +11,12 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { SidebarNavItem } from "./ui/SidebarNavItem"
 
 export function SidebarNav() {
   const pathname = usePathname()
@@ -36,49 +35,15 @@ export function SidebarNav() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === "/"}>
-                  <Link href="/">
-                    <Home className="h-4 w-4" />
-                    <span>Home</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === "/dashboard"}>
-                  <Link href="/dashboard">
-                    <LayoutDashboard className="h-4 w-4" />
-                    <span>Dashboard</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === "/tasks"}>
-                  <Link href="/tasks">
-                    <ListTodo className="h-4 w-4" />
-                    <span>Tasks</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === "/calendar"}>
-                  <Link href="/calendar">
-                    <Calendar className="h-4 w-4" />
-                    <span>Calendar</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === "/inbox"}>
-                  <Link href="/inbox">
-                    <Inbox className="h-4 w-4" />
-                    <span>Inbox</span>
-                  </Link>
-                </SidebarMenuButton>
+              <SidebarNavItem href="/" icon={Home} label="Home" />
+              <SidebarNavItem href="/dashboard" icon={LayoutDashboard} label="Dashboard" />
+              <SidebarNavItem href="/tasks" icon={ListTodo} label="Tasks" />
+              <SidebarNavItem href="/calendar" icon={Calendar} label="Calendar" />
+              <SidebarNavItem href="/inbox" icon={Inbox} label="Inbox">
                 <Badge className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground">
                   3
                 </Badge>
-              </SidebarMenuItem>
+              </SidebarNavItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -87,30 +52,9 @@ export function SidebarNav() {
           <SidebarGroupLabel>Projects</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/projects/website-redesign">
-                    <span className="h-2 w-2 rounded-full bg-blue-500" />
-                    <span>Website Redesign</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/projects/mobile-app">
-                    <span className="h-2 w-2 rounded-full bg-green-500" />
-                    <span>Mobile App</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/projects/marketing-campaign">
-                    <span className="h-2 w-2 rounded-full bg-purple-500" />
-                    <span>Marketing Campaign</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <SidebarNavItem href="/projects/website-redesign" icon={() => <span className="h-2 w-2 rounded-full bg-blue-500" />} label="Website Redesign" />
+              <SidebarNavItem href="/projects/mobile-app" icon={() => <span className="h-2 w-2 rounded-full bg-green-500" />} label="Mobile App" />
+              <SidebarNavItem href="/projects/marketing-campaign" icon={() => <span className="h-2 w-2 rounded-full bg-purple-500" />} label="Marketing Campaign" />
               <SidebarMenuItem>
                 <Button variant="ghost" className="w-full justify-start text-muted-foreground">
                   <PlusCircle className="mr-2 h-4 w-4" />
@@ -125,22 +69,8 @@ export function SidebarNav() {
           <SidebarGroupLabel>Team</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/team">
-                    <Users className="h-4 w-4" />
-                    <span>Members</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/analytics">
-                    <BarChart className="h-4 w-4" />
-                    <span>Analytics</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <SidebarNavItem href="/team" icon={Users} label="Members" />
+              <SidebarNavItem href="/analytics" icon={BarChart} label="Analytics" />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

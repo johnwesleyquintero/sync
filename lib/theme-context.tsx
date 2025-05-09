@@ -38,7 +38,7 @@ export function ThemeContextProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     applyThemeColors(currentTheme.colors)
-  }, [])
+  }, [currentTheme.colors])
 
   return (
     <ThemeContext.Provider value={{ currentTheme, setProjectTheme, applyCustomColors }}>

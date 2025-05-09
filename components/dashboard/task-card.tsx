@@ -15,19 +15,23 @@ interface TaskCardProps {
   snapshot: any
 }
 
+import { themeColors } from '@/lib/theme-config';
+
 export function TaskCard({ task, provided, snapshot }: TaskCardProps) {
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "high":
-        return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-      case "medium":
-        return "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
-      case "low":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-      default:
-        return "bg-slate-100 text-slate-800 dark:bg-slate-900/30 dark:text-slate-400"
-    }
+
+const getPriorityColor = (priority: string, theme: keyof typeof themeColors) => {
+  const colors = themeColors[theme];
+  switch (priority) {
+    case "high":
+      return `bg-${colors.accent}-100 text-${colors.accent}-800 dark:bg-${colors.accent}-900/30 dark:text-${colors.accent}-400`
+    case "medium":
+      return `bg-${colors.secondary}-100 text-${colors.secondary}-800 dark:bg-${colors.secondary}-900/30 dark:text-${colors.secondary}-400`
+    case "low":
+      return `bg-${colors.primary}-100 text-${colors.primary}-800 dark:bg-${colors.primary}-900/30 dark:text-${colors.primary}-400`
+    default:
+      return `bg-${colors.primary}-100 text-${colors.primary}-800 dark:bg-${colors.primary}-900/30 dark:text-${colors.primary}-400`
   }
+}
 
   return (
     <motion.div
