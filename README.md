@@ -151,4 +151,4 @@ To learn more about the technologies used:
 
 Deploy your Sync instance to [Vercel](https://vercel.com) for the best experience:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/johnwesleyquintero/sync
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/johnwesleyquintero/sync)
