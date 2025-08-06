@@ -65,6 +65,15 @@ const Sidebar: FC<SidebarProps> = ({
       w-20
   `}
     >
+      <div className='flex flex-col items-center pt-4'>
+        <Image
+          src="/logo.png"
+          alt="Sync Logo"
+          width={40}
+          height={40}
+          className="mb-4"
+        />
+      </div>
       <SidebarNav
         currentWorkspaceData={currentWorkspaceData}
         userWorkspacesData={userWorksapcesData}
